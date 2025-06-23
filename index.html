@@ -412,40 +412,6 @@
   <!-- Footer Section Ends-->
 
   <script>
-    const counters = document.querySelectorAll(".counter");
-    let triggered = false;
-
-    function runCounter() {
-      counters.forEach((counter) => {
-        const updateCount = () => {
-          const target = +counter.getAttribute("data-target");
-          const count = +counter.innerText;
-          const speed = 100;
-          const increment = Math.ceil(target / speed);
-
-          if (count < target) {
-            counter.innerText = count + increment;
-            setTimeout(updateCount, 30);
-          } else {
-            counter.innerText = target;
-          }
-        };
-        updateCount();
-      });
-    }
-
-    window.addEventListener("scroll", () => {
-      const sectionTop = document.querySelector(".counter-section").offsetTop;
-      const scrollTop = window.scrollY + window.innerHeight;
-
-      if (!triggered && scrollTop > sectionTop) {
-        runCounter();
-        triggered = true;
-      }
-    });
-  </script>
-
-  <script>
     // Mobile menu toggle
     const menuBtn = document.getElementById("menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
@@ -465,65 +431,6 @@
 
     requestAnimationFrame(raf);
   </script>
-
-  <script>
-    // Projects Section
-    let currentIndex = 0;
-    let projects = [];
-
-    // Load external JSON file
-    fetch("projects.json")
-      .then((response) => response.json())
-      .then((data) => {
-        projects = data;
-        showProject(currentIndex);
-      });
-
-    function showProject(index) {
-      const project = projects[index];
-      const container = document.getElementById("project-content");
-      container.innerHTML = `
-         <!-- Left Text -->
-        <div class="md:pt-[230px]">
-          <h3 class="text-2xl uppercase mb-2 md:mb-5 font-medium font-heading">${project.title}</h3>
-          <div class="mb-3 md:mb-5 pb-4 md:pb-8 h-[85px]">
-          <p class="text-sm font-medium font-paragraph max-w-sm text-justify">${project.description}</p>
-          </div>
-          <a href="#" class="border border-white text-white text-sm md:text-base md:mb-8 px-4 md:px-5 py-1.5 md:py-2 inline-block hover:bg-white hover:text-black transition">ENQUIRE NOW</a>
-        </div>
-
-        <!-- Center Image -->
-        <div class="flex justify-center">
-          <img src="${project.image}"  class="w-full max-w-sm shadow-sm" alt="${project.title}" style="height: 400px;"/>
-        </div>
-
-         <!-- Right Info -->
-          <div>
-            <div class="mb-4">
-              <h5 class="text-2xl font-medium font-heading">Square Feet</h5>
-              <p class="text-xl text-gray-300 text-sm mt-2 font-paragraph">${project.squareFeet}</p>
-            </div>
-            <div class="mb-4">
-              <h5 class="text-2xl font-medium font-heading">No. of Rooms</h5>
-              <p class="text-xl text-gray-300 text-sm mt-2 font-paragraph">${project.rooms}</p>
-            </div>
-            <div class="mb-4">
-              <h5 class="text-2xl font-medium font-heading">Price Range</h5>
-              <p class="text-xl text-gray-300 text-sm mt-2 font-paragraph">${project.price}</p>
-            </div>
-          </div>
-      `;
-    }
-
-    function nextProject() {
-      currentIndex = (currentIndex + 1) % projects.length;
-      showProject(currentIndex);
-    }
-
-    function prevProject() {
-      currentIndex = (currentIndex - 1 + projects.length) % projects.length;
-      showProject(currentIndex);
-    }
   </script>
   <!-- AOS JS -->
   <script src="./js/aos.js"></script>
